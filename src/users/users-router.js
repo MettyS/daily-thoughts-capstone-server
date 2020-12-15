@@ -18,7 +18,8 @@ usersRouter.route('/')
   })
 
   .post(jsonParser, (req, res, next) => {
-    const { email, password, nickname } = req.body;
+    const { password, nickname } = req.body;
+    const email = req.body.email.toLowerCase();
     console.log(email, password, nickname);
 
     //check if there's a missing field
@@ -30,22 +31,32 @@ usersRouter.route('/')
                   });
       }
     }
+
     //check that the fields are valid
     const passwordError = UsersService.validatePassword(password);
-    if(passwordError)
-      return res.status(400).json({ error: passwordError })
+    if(passwordError) {
+      console.log('password error: ', passwordError);
+      return res.status(400).json({ error: {message: passwordError }})
+    }
 
-    const emailError = UsersService.validateEmail(req.app.get('db'), email);
-    console.log('EMAIL ERROR IS >>>>>>>>>>>>>> ', emailError)
-    if(emailError)
-      return res.status(400).json({ error: emailError })
+    const inputError = UsersService.validateEmailAndNicknameSyntax(email, nickname);
+    if(inputError) {
+      console.log('imput error: ', inputError);
+      return res.status(400).json({error: {message: inputError}})
+    }
 
-    const nicknameError = UsersService.validateNickname(nickname);
-    if(nicknameError)
-      return res.status(400).json({ error: nicknameError })
 
-    console.log('MADE IT PAST VALIDATIONS!!');
+    UsersService.validateEmailAndNickname(req.app.get('db'), email, nickname)
+    .then(result => {
+      console.log('EMAIL/nickname ERROR IS >>>>>>>>>>>>>> ', result);
+      console.log('email/nickname error is a: ', typeof(result));
+      if(result) {
+        return res.status(400).json({ error: {message: result }})
+      }
+
+      console.log('MADE IT PAST VALIDATIONS!!');
     
+    console.log('making password hash');
     UsersService.generatePasswordHash(password).then(hashedPassword => {
       const newUser = {
         nickname,
@@ -53,6 +64,7 @@ usersRouter.route('/')
         password: hashedPassword
       };
 
+    console.log('adding user');
       UsersService.addUser(req.app.get('db'), newUser)
         .then(addedUser => {
           console.log("the added user is: ", addedUser);
@@ -62,6 +74,24 @@ usersRouter.route('/')
         })
         .catch(next);
     })
+
+
+    })
+    .catch( er => {
+      console.log('>>>>>>ERROR ON 54 IS, ', er);
+    })
+    // console.log('returned emailerror is: ', emailError);
+    // if(emailError){
+    //   return res.status(400).json({ error: emailError });
+    //   isEr = true;
+    // }
+
+    /*const nicknameError = UsersService.validateNickname(nickname);
+    if(nicknameError) {
+      res.status(400).json({ error: nicknameError })
+      isEr = true;
+      next();
+    }*/
     
   })
 
