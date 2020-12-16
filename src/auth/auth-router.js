@@ -13,7 +13,7 @@ authRouter.route('/login')
     for (const [key, value] of Object.entries(loginUser)){
       if (value == null){
         return res.status(400).json({
-          error: `Missing '${key}' in request body`
+          error: {message: `Missing '${key}' in request body` }
         });
       }
     }
@@ -26,14 +26,14 @@ authRouter.route('/login')
         console.log('dbUser:', dbUser)
         if (!dbUser)
           return res.status(400).json({
-            error: 'Incorrect email or password',
+            error: {message: 'Incorrect email or password'},
           })
         return AuthService.comparePasswords(loginUser.password, dbUser.password)
           .then(isMatch => {
             console.log('password isMatch? : ', isMatch);
             if (!isMatch){
               return res.status(400).json({
-                error: 'Incorrect nickname or password',
+                error: {message: 'Incorrect nickname or password'},
               })
             }
               

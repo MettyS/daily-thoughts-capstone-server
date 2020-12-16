@@ -27,7 +27,7 @@ projectRouter.route('/')
 
     ProjectService.addProject(req.app.get('db'), newProject)
       .then(addedProject => {
-        console.log(addedProject);
+        console.log('added project: ', addedProject);
         res.json(ProjectService.serializeProject(addedProject));
       })
       .catch(next);

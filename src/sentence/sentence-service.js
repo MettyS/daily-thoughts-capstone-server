@@ -10,6 +10,15 @@ serializeSentence(sentence) {
     is_archived: sentence.is_archived
   };
 },
+serializeProject(project) {
+  return {
+    id: project.id,
+    user_id: project.user_id,
+    project_name: xss(project.project_name),
+    date_created: project.date_created,
+    is_archived: project.is_archived
+  };
+},
 getSentences(db) {
   return db('sentences')
     .select('*');
@@ -49,7 +58,7 @@ updateSentence(db, sentence_id, sentence){
   })
   .returning('*')
   .then(rows => {
-      return rows[0]
+      return rows[0];
   })
 },
 getProjectById(db, project_id) {
@@ -57,6 +66,17 @@ getProjectById(db, project_id) {
     .select('*')
     .where( 'id', project_id)
     .first();
+},
+updateProject(db, project_id, project) {
+  return db('projects')
+  .update(project, returning = true)
+  .where({
+    id: project_id
+  })
+  .returning('*')
+  .then(rows => {
+    return rows[0];
+  })
 },
 validateContent(content) {
   let erObj = null;

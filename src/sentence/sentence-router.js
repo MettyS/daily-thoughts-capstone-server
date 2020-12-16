@@ -26,9 +26,10 @@ sentenceRouter.route(':sentence_id')
     res.status(200).json(SentenceService.serializeSentence(res.sentence));
   })
   .patch( jsonParser, (req, res, next) => {
-    const {content} = req.body;
+    const {content, project_name, project_id} = req.body;
     const sentenceToPatchWith = {
-      content
+      content,
+      last_updated: now()
     };
 
     let erObj = SentenceService.validateContent(sentenceToPatchWith.content);
@@ -38,7 +39,19 @@ sentenceRouter.route(':sentence_id')
     SentenceService.updateSentence(req.app.get('db'), res.sentence.id, sentenceToPatchWith)
       .then(updatedSentence => {
         console.log('the sentence has been updated to: ', updatedSentence);
-        res.status(200).json(SentenceService.serializeSentence(updatedSentence))
+        res.json(SentenceService.serializeSentence(updatedSentence))
+      })
+      .catch(next);
+
+      console.log('updating project >>>> ', project_name)
+    const projectToPatchWith = {
+      last_updated: now()
+    }
+
+    SentenceService.updateProject(req.app.get('db'), project_id, projectToPatchWith)
+      .then(updatedProject => {
+        console.log('the project has been updated to: ', updatedProject);
+        res.status(200).json(SentenceService.serializeProject(updatedProject));
       })
       .catch(next);
 

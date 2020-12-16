@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS projects (
         REFERENCES users(id) ON DELETE CASCADE NOT NULL,
     project_name VARCHAR (20) NOT NULL,
     date_created TIMESTAMP DEFAULT now() NOT NULL,
+    last_updated TIMESTAMP DEFAULT now() NOT NULL,
     is_archived BOOLEAN DEFAULT false NOT NULL
 );
 
@@ -27,5 +28,6 @@ CREATE TABLE IF NOT EXISTS sentences (
         REFERENCES projects(id) ON DELETE CASCADE NOT NULL,
     content TEXT NOT NULL,
     date_created TIMESTAMP DEFAULT now() NOT NULL,
+    last_updated TIMESTAMP DEFAULT now() NOT NULL,
     is_archived BOOLEAN DEFAULT false NOT NULL
 );
