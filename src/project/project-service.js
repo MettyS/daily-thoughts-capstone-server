@@ -7,6 +7,7 @@ const ProjectService = {
       user_id: project.user_id,
       project_name: xss(project.project_name),
       date_created: project.date_created,
+      last_updated: project.last_updated,
       is_archived: project.is_archived
     };
   },
@@ -47,12 +48,6 @@ const ProjectService = {
         return rows[0]
     })
   },
-  getUserById(db, userId) {
-    return db('users')
-      .select('*')
-      .where('id', userId)
-      .first();
-  }
   };
   
   module.exports = ProjectService;
