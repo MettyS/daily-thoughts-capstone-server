@@ -1,7 +1,7 @@
 {
-  "name": "thinkful-node-postgres-boilerplate-app",
+  "name": "daily-thoughts-capstone-server",
   "version": "1.0.0",
-  "description": "Node and PostgreSQL Boilerplate app",
+  "description": "The server for daily-thoughts capstone",
   "main": "server.js",
   "scripts": {
     "test": "mocha --require test/setup.js --watch",
