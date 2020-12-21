@@ -1,9 +1,9 @@
 require('dotenv').config()
-const app = require('./app')
+const app = require('./src/app')
 const {
     PORT,
     DATABASE_URL
-} = require('./config')
+} = require('./src/config')
 const knex = require('knex')
 
 const db = knex({
