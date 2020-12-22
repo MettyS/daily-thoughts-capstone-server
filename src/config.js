@@ -4,3 +4,4 @@ module.exports = {
     DATABASE_URL: process.env.DATABASE_URL || "postgresql://Metty:mettypass@localhost/daily-thoughts-capstone",
     JWT_SECRET: process.env.JWT_SECRET || 'lulu-is-soft',
 }
+
