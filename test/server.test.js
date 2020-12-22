@@ -28,7 +28,7 @@ describe('Pancake API:', function() {
     before('make knex instance', () => {
         db = knex({
             client: 'pg',
-            connection: process.env.TEST_DB_URL,
+            connection: process.env.TEST_DATABASE_URL,
         })
         app.set('db', db)
     });
@@ -46,9 +46,9 @@ describe('Pancake API:', function() {
         })
 
         //relevant
-        it('should respond to GET `/api/pancakes` with an array of pancakes and status 200', function() {
+        it('should respond to GET `/pancakes` with an array of pancakes and status 200', function() {
             return supertest(app)
-                .get('/api/pancakes')
+                .get('/pancakes')
                 .expect(200)
                 .expect(res => {
                     expect(res.body).to.be.a('array');
@@ -76,7 +76,7 @@ describe('Pancake API:', function() {
                 .then(_doc => {
                     doc = _doc
                     return supertest(app)
-                        .get(`/api/pancakes/${doc.id}`)
+                        .get(`/pancakes/${doc.id}`)
                         .expect(200);
                 })
                 .then(res => {
@@ -90,7 +90,7 @@ describe('Pancake API:', function() {
 
         it('should respond with a 404 when given an invalid id', () => {
             return supertest(app)
-                .get('/api/pancakes/aaaaaaaaaaaa')
+                .get('/pancakes/aaaaaaaaaaaa')
                 .expect(404);
         });
 
@@ -106,7 +106,7 @@ describe('Pancake API:', function() {
             };
 
             return supertest(app)
-                .post('/api/pancakes')
+                .post('/pancakes')
                 .send(newItem)
                 .expect(201)
                 .expect(res => {
@@ -114,7 +114,7 @@ describe('Pancake API:', function() {
                     expect(res.body).to.include.keys('id', 'title', 'completed');
                     expect(res.body.title).to.equal(newItem.title);
                     expect(res.body.completed).to.be.false;
-                    expect(res.headers.location).to.equal(`/api/pancakes/${res.body.id}`)
+                    expect(res.headers.location).to.equal(`/pancakes/${res.body.id}`)
                 });
         });
 
@@ -123,7 +123,7 @@ describe('Pancake API:', function() {
                 foobar: 'broken item'
             };
             return supertest(app)
-                .post('/api/pancakes')
+                .post('/pancakes')
                 .send(badItem)
                 .expect(400);
         });
@@ -149,7 +149,7 @@ describe('Pancake API:', function() {
                 .then(_doc => {
                     doc = _doc
                     return supertest(app)
-                        .patch(`/api/pancakes/${doc.id}`)
+                        .patch(`/pancakes/${doc.id}`)
                         .send(item)
                         .expect(200);
                 })
@@ -170,7 +170,7 @@ describe('Pancake API:', function() {
                 .first()
                 .then(doc => {
                     return supertest(app)
-                        .patch(`/api/pancakes/${doc.id}`)
+                        .patch(`/pancakes/${doc.id}`)
                         .send(badItem)
                         .expect(400);
                 })
@@ -181,7 +181,7 @@ describe('Pancake API:', function() {
                 'title': 'Buy New Dishes'
             };
             return supertest(app)
-                .patch('/api/pancakes/aaaaaaaaaaaaaaaaaaaaaaaa')
+                .patch('/pancakes/aaaaaaaaaaaaaaaaaaaaaaaa')
                 .send(item)
                 .expect(404);
         });
@@ -201,14 +201,14 @@ describe('Pancake API:', function() {
                 .first()
                 .then(doc => {
                     return supertest(app)
-                        .delete(`/api/pancakes/${doc.id}`)
+                        .delete(`/pancakes/${doc.id}`)
                         .expect(204);
                 })
         });
 
         it('should respond with a 404 for an invalid id', function() {
             return supertest(app)
-                .delete('/api/pancakes/aaaaaaaaaaaaaaaaaaaaaaaa')
+                .delete('/pancakes/aaaaaaaaaaaaaaaaaaaaaaaa')
                 .expect(404);
         });
     });
