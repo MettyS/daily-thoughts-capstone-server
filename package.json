@@ -11,7 +11,7 @@
     "migrate": "postgrator --config postgrator-config.js",
     "start": "nodemon src/server.js",
     "predeploy": "npm audit",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku"
   },
   "keywords": [],
   "author": "",
