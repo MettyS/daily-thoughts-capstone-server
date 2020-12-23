@@ -12,7 +12,7 @@ usersRouter.route('/')
     UsersService.getUsers(req.app.get('db'))
     .then(users => {
       console.log('All users: ', users);
-      res.json(users);
+      res.status(200).json(users);
     })
     .catch(next);
   })

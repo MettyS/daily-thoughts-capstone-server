@@ -22,6 +22,7 @@ pancakeRouter
         PancakeService.getPancakes(req.app.get('db'))
             .then(pancakes => {
                 //map the results to get each one of the objects and serialize them
+            
                 res.json(pancakes.map(serializePancake))
             })
             .catch(next)
