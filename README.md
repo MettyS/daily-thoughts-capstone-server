@@ -85,35 +85,35 @@ The app's functionality includes:
 
 
 
-### 4. Technology (done)
+### 4. Technology 
 * Front-End: HTML5, CSS3, JavaScript ES6, React
 * Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, Postgres
 * Development Environment: Heroku, DBeaver
 
 
 
-### 5. Wireframes (to do now)
+### 5. Wireframes
 Landing Page
 :-------------------------:
-![Landing Page](/github-images/wireframes/landing-page-wireframe.jpg)
+![Landing Page](./github-images/wireframes/landing-page-wireframe.jpg)
 
 Register Page
 :-------------------------:
-![Register Page](/github-images/wireframes/register-page-wireframe.png)
+![Register Page](./github-images/wireframes/register-page-wireframe.png)
 
 Login Page
 :-------------------------:
-![Login Page](/github-images/wireframes/login-page-wireframe.png)
+![Login Page](./github-images/wireframes/login-page-wireframe.png)
 
 Project List Page
 :-------------------------:
-![Project List Page](/github-images/wireframes/project-list-wireframe.png)
+![Project List Page](./github-images/wireframes/project-list-wireframe.png)
 
 Sentence Thread
 :-------------------------:
-![Sentence Thread](/github-images/wireframes/sentence-thread-wireframe.png)
+![Sentence Thread](./github-images/wireframes/sentence-thread-wireframe.png)
 
-### 6. Front-end Structure - React Components Map (to do later)
+### 6. Front-end Structure - React Components Map
 * __Index.js__ (stateless)
     * __App.js__ (stateful)
         * __LandingPage.js__ (stateless)
@@ -157,7 +157,7 @@ Sentence Thread
     * is_archived (default false)
 
 
-### 8. API Documentation (to do later)
+### 8. API Documentation
 API Documentation details:
 ```text
 /
@@ -302,23 +302,23 @@ API Documentation details:
 ### 9. Screenshots
 Landing Page
 :-------------------------:
-![Landing Page](/github-images/screenshots/landing-page-screenshot.png)
+![Landing Page](./github-images/screenshots/landing-page-screenshot.png)
 
 Register Page
 :-------------------------:
-![Register Page](/github-images/screenshots/register-page-screenshot.png)
+![Register Page](./github-images/screenshots/register-page-screenshot.png)
 
 Login Page
 :-------------------------:
-![Login Page](/github-images/screenshots/login-page-screenshot.png)
+![Login Page](./github-images/screenshots/login-page-screenshot.png)
 
 Project List
 :-------------------------:
-![Project List](/github-images/screenshots/project-list-screenshot.png)
+![Project List](./github-images/screenshots/project-list-screenshot.png)
 
 Project Page
 :-------------------------:
-![Project Page](/github-images/screenshots/project-page-screenshot.png)
+![Project Page](./github-images/screenshots/project-page-screenshot.png)
 
 
 
