@@ -36,13 +36,13 @@ usersRouter.route('/')
     const passwordError = UsersService.validatePassword(password);
     if(passwordError) {
       console.log('password error: ', passwordError);
-      return res.status(400).json({ error: {message: passwordError }})
+      return res.status(400).json({ error: {message: passwordError }});
     }
 
     const inputError = UsersService.validateEmailAndNicknameSyntax(email, nickname);
     if(inputError) {
       console.log('imput error: ', inputError);
-      return res.status(400).json({error: {message: inputError}})
+      return res.status(400).json({error: {message: inputError}});
     }
 
 
@@ -51,7 +51,7 @@ usersRouter.route('/')
       console.log('EMAIL/nickname ERROR IS >>>>>>>>>>>>>> ', result);
       console.log('email/nickname error is a: ', typeof(result));
       if(result) {
-        return res.status(400).json({ error: {message: result }})
+        return res.status(400).json({ error: {message: result }});
       }
 
       console.log('MADE IT PAST VALIDATIONS!!');
@@ -101,7 +101,7 @@ usersRouter.route('/:user_id')
     UsersService.getUserById(req.app.get('db'), user_id)
       .then(userWithId => {
         if(!userWithId) 
-          return res.status(404).json({ error: {message: `User does not exist`} })
+          return res.status(404).json({ error: {message: `User does not exist`} });
         
         res.user = userWithId;
         next();

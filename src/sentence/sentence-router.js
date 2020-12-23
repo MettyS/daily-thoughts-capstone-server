@@ -8,10 +8,10 @@ const sentenceRouter = express.Router();
 const jsonParser = express.json();
 
 const updateProject = (project_id) => {
-  console.log('updating project >>>> ', project_id)
+  console.log('updating project >>>> ', project_id);
   const projectToPatchWith = {
     last_updated: now()
-  }
+  };
 
   ProjectService.updateProject(req.app.get('db'), project_id, projectToPatchWith)
     .then(updatedProject => {
@@ -19,7 +19,7 @@ const updateProject = (project_id) => {
       res.status(201).json(ProjectService.serializeProject(updatedProject));
     })
     .catch(next);
-}
+};
 
 sentenceRouter.route(':sentence_id')
   .all( (req, res, next) => {
@@ -28,13 +28,13 @@ sentenceRouter.route(':sentence_id')
     SentenceService.getSentenceById(req.app.get('db'), sentence_id)
       .then(sentenceWithId => {
         if(!sentenceWithId)
-          return res.status(404).json({ error: {message: `Sentence does not exist`}})
+          return res.status(404).json({ error: {message: `Sentence does not exist`}});
 
         res.sentence = sentenceWithId;
         console.log('setting res.sentence to: ', sentenceWithId);
         next();
       })
-      .catch(next)
+      .catch(next);
   })
   .get( (req, res) => {
     res.status(200).json(SentenceService.serializeSentence(res.sentence));
@@ -53,7 +53,7 @@ sentenceRouter.route(':sentence_id')
     SentenceService.updateSentence(req.app.get('db'), res.sentence.id, sentenceToPatchWith)
       .then(updatedSentence => {
         console.log('the sentence has been updated to: ', updatedSentence);
-        res.json(SentenceService.serializeSentence(updatedSentence))
+        res.json(SentenceService.serializeSentence(updatedSentence));
 
         updateProject(project_id);
       })
@@ -82,9 +82,9 @@ sentenceRouter.route('/')
   .get( (req, res, next) => {
     SentenceService.getSentences(req.app.get('db'))
       .then(sentences => {
-        res.status(200).json(sentences.map(sentence => SentenceService.serializeSentence(sentence)))
+        res.status(200).json(sentences.map(sentence => SentenceService.serializeSentence(sentence)));
       })
-      .catch(next)
+      .catch(next);
   })
   // add a sentence to a particular project
   .post( jsonParser, (req, res, next) => {
@@ -102,7 +102,7 @@ sentenceRouter.route('/')
     SentenceService.addSentence(req.app.get('db'), sentenceToAdd)
       .then(addedSentence => {
         console.log(SentenceService.serializeSentence(addedSentence));
-        res.json(SentenceService.serializeSentence(addedSentence))
+        res.json(SentenceService.serializeSentence(addedSentence));
 
         updateProject(project_id);
       })

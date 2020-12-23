@@ -24,7 +24,7 @@ const UsersService = {
   deleteUser(db, id) {
     return db('users')
       .where({ id })
-      .delete()
+      .delete();
   },
   //getUsersByDate(db, date) {},
   getUsersByName(db, name) {
@@ -47,7 +47,7 @@ const UsersService = {
   },
   validateEmailAndNicknameSyntax(email, nickname) {
     //const emailPatt = /^[0-9a-fA-F]+@[a-fA-F].com$/;
-    const emailPatt = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const emailPatt = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!emailPatt.test(email))
       return 'Invalid email';
     
@@ -80,7 +80,7 @@ const UsersService = {
     })
     .catch(res => {
       console.log('entered catch, the baderror is, ', res);
-      return '>>>>>>>>>>>>>>>>>Some Error'
+      return '>>>>>>>>>>>>>>>>>Some Error';
     });
     //console.log(this.getUsersByEmail(db, email).then(res => this.serializeUser(res)))
     //return this.getUsersByEmail(db, email).then(res => this.serializeUser(res)) ? 'Email or username are already in use': null;

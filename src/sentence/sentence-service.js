@@ -33,7 +33,7 @@ getSentencesByRange(db, {startDate, endDate}) {
     .select('*')
     .where('date_created', '>=', startDate)
     .where('date_created', '<', endDate)
-    .then(sentencesFromRange => sentencesFromRange)
+    .then(sentencesFromRange => sentencesFromRange);
 },
 addSentence(db, sentence) {
   return db('sentences')
@@ -52,7 +52,7 @@ updateSentence(db, sentence_id, sentence){
   .returning('*')
   .then(rows => {
       return rows[0];
-  })
+  });
 },
 validateContent(content) {
   let erObj = null;

@@ -39,7 +39,7 @@ projectRouter.route('/:project_id')
     ProjectService.getProjectById(req.app.get('db'), project_id)
       .then(projectWithId => {
         if(!projectWithId)
-          return res.status(404).json({ error: {message: 'Project does not exist'}})
+          return res.status(404).json({ error: {message: 'Project does not exist'}});
 
         res.project = projectWithId;
         console.log('setting res.project to: ', projectWithId);
@@ -60,7 +60,7 @@ projectRouter.route('/:project_id')
     ProjectService.updateProject(req.app.get('db'), res.project.id, projectToPatchWith)
       .then(updatedProject => {
         console.log('the project has been updated to: ', updatedProject);
-        res.status(200).json(ProjectService.serializeProject(updatedProject))
+        res.status(200).json(ProjectService.serializeProject(updatedProject));
       })
       .catch(next);
 
@@ -69,7 +69,7 @@ projectRouter.route('/:project_id')
     const project_id = res.project.id;
     const deleteValue = {
       is_archived: Boolean(1)
-    }
+    };
 
     ProjectService.updateProject(req.app.get('db'), project_id, deleteValue)
       .then(archivedProject => {
@@ -77,6 +77,6 @@ projectRouter.route('/:project_id')
         res.status(204).end();
       })
       .catch(next);
-  })
+  });
 
 module.exports = projectRouter;

@@ -85,17 +85,17 @@ The app's functionality includes:
 
 
 
-### 4. Technology 
+### 4. Technology (done)
 * Front-End: HTML5, CSS3, JavaScript ES6, React
 * Back-End: Node.js, Express.js, Mocha, Chai, RESTful API Endpoints, Postgres
 * Development Environment: Heroku, DBeaver
 
 
 
-### 5. Wireframes
+### 5. Wireframes (to do now)
 Landing Page
 :-------------------------:
-![Landing Page](./github-images/wireframes/landing-page-wireframe.jpg)
+![Landing Page](./github-images/wireframes/landing-page-wireframe.png)
 
 Register Page
 :-------------------------:
@@ -113,7 +113,7 @@ Sentence Thread
 :-------------------------:
 ![Sentence Thread](./github-images/wireframes/sentence-thread-wireframe.png)
 
-### 6. Front-end Structure - React Components Map
+### 6. Front-end Structure - React Components Map (to do later)
 * __Index.js__ (stateless)
     * __App.js__ (stateful)
         * __LandingPage.js__ (stateless)
@@ -157,7 +157,7 @@ Sentence Thread
     * is_archived (default false)
 
 
-### 8. API Documentation
+### 8. API Documentation (to do later)
 API Documentation details:
 ```text
 /
